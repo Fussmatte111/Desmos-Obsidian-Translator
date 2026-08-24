@@ -52,6 +52,13 @@
                 Color
                 <select id="opt-default-color"></select>
               </label>
+              <label>
+                DarkMode
+                <select id="opt-darkmode">
+                  <option value="false" selected>false</option>
+                  <option value="true">true</option>
+                </select>
+              </label>
             </div>
           </section>
 
@@ -71,6 +78,13 @@
             </label>
           </div>
           <pre id="code-preview"></pre>
+          <div id="css-pane" hidden>
+            <div class="code-head">
+              <h2>CSS</h2>
+              <button type="button" id="copy-css-btn">Copy CSS</button>
+            </div>
+            <pre id="css-preview"></pre>
+          </div>
           <p id="copy-status"></p>
         </aside>
       </main>

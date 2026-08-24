@@ -48,6 +48,27 @@ const LATEX_FUNCS = [
   "max",
 ];
 
+const DARK_GRAPH_CSS = `.theme-dark .dcg-svg-background {
+  fill: var(--background-primary);
+}
+.theme-dark .dcg-svg-minor-gridline {
+  stroke: rgba(255, 255, 255, 0.2);
+}
+.theme-dark .dcg-svg-axis-line {
+  stroke: #ffffff;
+}
+.theme-dark .dcg-svg-axis-value :nth-child(1) {
+  stroke: var(--background-primary);
+}
+.theme-dark .dcg-svg-axis-value :nth-child(2) {
+  stroke: #ffffff;
+}
+.theme-dark .dcg-svg-label :nth-child(2) > * :nth-child(1) {
+  fill: #ffffff;
+}
+.theme-dark .dcg-svg-label :nth-child(1) > * :nth-child(1) {
+  stroke: var(--background-primary);
+}`;
 let config = FALLBACK_CONFIG;
 let equations = [];
 let eqSeq = 0;
@@ -139,8 +160,17 @@ function generateCode() {
   return "```desmos-graph\n" + (inner ? inner + "\n" : "") + "```";
 }
 
+function darkModeOn() {
+  return document.getElementById("opt-darkmode").value === "true";
+}
+
 function renderPreview() {
   document.getElementById("code-preview").textContent = generateCode();
+  const cssPane = document.getElementById("css-pane");
+  cssPane.hidden = !darkModeOn();
+  if (!cssPane.hidden) {
+    document.getElementById("css-preview").textContent = DARK_GRAPH_CSS;
+  }
 }
 
 function fillColorSelect(select) {
@@ -229,17 +259,25 @@ function renderEquations() {
     .join("");
 }
 
-async function copyCode() {
+async function copyText(text, okLabel) {
   const status = document.getElementById("copy-status");
   try {
-    await navigator.clipboard.writeText(generateCode());
-    status.textContent = "Copied";
+    await navigator.clipboard.writeText(text);
+    status.textContent = okLabel;
     setTimeout(() => {
       status.textContent = "";
     }, 1600);
   } catch {
     status.textContent = "Error";
   }
+}
+
+async function copyCode() {
+  await copyText(generateCode(), "Copied");
+}
+
+async function copyCss() {
+  await copyText(DARK_GRAPH_CSS, "Copied");
 }
 
 function resetAll() {
@@ -252,6 +290,7 @@ function resetAll() {
   document.getElementById("opt-grid").value = "true";
   document.getElementById("opt-degree").value = "radians";
   document.getElementById("opt-default-color").value = "";
+  document.getElementById("opt-darkmode").value = "false";
   document.getElementById("opt-latex").checked = true;
   equations = [newEquation()];
   renderEquations();
@@ -265,6 +304,7 @@ function bindEvents() {
   document.getElementById("wizard").addEventListener("change", renderPreview);
   document.getElementById("opt-latex").addEventListener("change", renderPreview);
   document.getElementById("copy-btn").addEventListener("click", copyCode);
+  document.getElementById("copy-css-btn").addEventListener("click", copyCss);
   document.getElementById("reset-btn").addEventListener("click", resetAll);
   document.getElementById("add-equation").addEventListener("click", () => {
     equations.push(newEquation());

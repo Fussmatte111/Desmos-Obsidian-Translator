@@ -61,8 +61,7 @@ h2 {
 }
 
 .header-actions,
-.code-head,
-.check {
+.code-head {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -177,8 +176,11 @@ select:focus {
 }
 
 .check {
+  display: flex;
   margin: 8px 0 0;
   flex-direction: row;
+  align-items: center;
+  gap: 8px;
   color: var(--muted);
 }
 
@@ -225,12 +227,21 @@ button.primary:hover,
 }
 
 .code-head {
+  display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
 }
 
 .code-head h2 {
   margin: 0;
+}
+
+#css-pane {
+  margin-top: 16px;
+}
+
+#css-pane pre {
+  min-height: 160px;
 }
 
 pre {
