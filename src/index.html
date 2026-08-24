@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Desmos Graph</title>
+    <script type="module" src="/main.js" defer></script>
+  </head>
+  <body>
+    <div class="app">
+      <header>
+        <h1>Desmos Graph</h1>
+        <div class="header-actions">
+          <button type="button" id="reset-btn">Reset</button>
+          <button type="button" class="primary" id="copy-btn">Copy</button>
+        </div>
+      </header>
+
+      <main>
+        <form id="wizard" novalidate>
+          <section>
+            <h2>Bounds</h2>
+            <div class="axis">
+              <label>Top <input id="bound-top" type="number" step="any" value="10" /></label>
+              <label>Left <input id="bound-left" type="number" step="any" value="-10" /></label>
+              <label>Right <input id="bound-right" type="number" step="any" value="10" /></label>
+              <label>Bottom <input id="bound-bottom" type="number" step="any" value="-10" /></label>
+            </div>
+          </section>
+
+          <section>
+            <h2>Display</h2>
+            <div class="row">
+              <label>Width <input id="opt-width" type="number" min="1" /></label>
+              <label>Height <input id="opt-height" type="number" min="1" /></label>
+              <label>
+                Grid
+                <select id="opt-grid">
+                  <option value="true" selected>true</option>
+                  <option value="false">false</option>
+                </select>
+              </label>
+              <label>
+                DegreeMode
+                <select id="opt-degree">
+                  <option value="radians" selected>radians</option>
+                  <option value="degrees">degrees</option>
+                </select>
+              </label>
+              <label>
+                Color
+                <select id="opt-default-color"></select>
+              </label>
+            </div>
+          </section>
+
+          <section>
+            <h2>Equations</h2>
+            <div id="equations" class="equations"></div>
+            <button type="button" id="add-equation">+</button>
+          </section>
+        </form>
+
+        <aside>
+          <div class="code-head">
+            <h2>Code</h2>
+            <label class="check">
+              <input type="checkbox" id="opt-latex" checked />
+              LaTeX
+            </label>
+          </div>
+          <pre id="code-preview"></pre>
+          <p id="copy-status"></p>
+        </aside>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "new_graph": "f(x)=",
+  "borders": {
+    "left": "left=-",
+    "right": "right=",
+    "top": "top=",
+    "bottom": "bottom=-"
+  },
+  "graph-properties": {
+    "valid_colors": [
+      "red",
+      "green",
+      "blue",
+      "yellow",
+      "magenta",
+      "cyan",
+      "purple",
+      "orange",
+      "black",
+      "white"
+    ],
+    "valid_lines": ["solid", "dashed", "dotted"],
+    "valid_point_styles": ["point", "open", "cross"],
+    "degree_modes": ["radians", "degrees"]
+  }
+}
